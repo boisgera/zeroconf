@@ -38,5 +38,9 @@ def get_info(module):
 
 
 sys.path.insert(0, "."); import zeroconf
+info = get_info(zeroconf)
+
+info["requires"] = "pbs"
+
 distutils.core.setup(get_info(zeroconf))
 
