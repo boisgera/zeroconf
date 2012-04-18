@@ -2,7 +2,7 @@
 # coding: utf-8
 
 """
-Simple/Pythonic Zeroconf Service Finder/Publisher
+Simple/Pythonic Zeroconf Service Search/Registration
 """
 
 __author__ = u"Sébastien Boisgérault <Sebastien.Boisgerault@mines-paristech.fr>"
@@ -23,9 +23,9 @@ if sys.platform.startswith("linux"):
 
 # Service Search
 # ------------------------------------------------------------------------------
-def find(name=None, type=None, domain="local"):
+def search(name=None, type=None, domain="local"):
     """
-    Find available zeroconf services
+    Search available zeroconf services
 
     The result is a dictionary with service (name, type, domain) keys 
     and data values ; data are dictionaries with "hostname", "address", 
@@ -91,7 +91,7 @@ def decode(text):
 
 # Service Registration
 # ------------------------------------------------------------------------------
-_publishers = {}
+_publishers = {} # publisher processes identified by (name, type, port)
 
 def register(name, type, port):
     port = str(port)

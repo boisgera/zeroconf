@@ -42,5 +42,5 @@ info = get_info(zeroconf)
 
 info["requires"] = "pbs"
 
-distutils.core.setup(get_info(zeroconf))
+distutils.core.setup(**get_info(zeroconf))
 
