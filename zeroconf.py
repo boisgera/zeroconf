@@ -6,6 +6,7 @@ Simple/Pythonic Zeroconf Service Search/Registration
 """
 
 __author__ = u"Sébastien Boisgérault <Sebastien.Boisgerault@mines-paristech.fr>"
+__license__ = "MIT License"
 __version__ = None
 
 # Python 2.7 Standard Library

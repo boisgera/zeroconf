@@ -11,11 +11,20 @@ def get_info(module):
  
     info = {}
 
+    name = getattr(module, "__name__", None)
+    if not name:
+        name = module.__file__.split(".")[0]
+    info["name"] = name
+
     author_info = getattr(zeroconf, "__author__", None)
     if author_info:
         # "author <author_email>" syntax expected
         info["author"] = author_info.split("<")[0].strip()
         info["author_email"] = author_info.split("<")[1].strip()[:-1]
+
+    license = getattr(zeroconf, "__license__", None)
+    if license:
+        info["license"] = license
 
     version = getattr(zeroconf, "__version__", None)
     if version:
