@@ -91,7 +91,7 @@ def decode(text):
 
 # Service Registration
 # ------------------------------------------------------------------------------
-_publishers = {} # publisher processes identified by (name, type, port)
+_publishers = {} # service publisher processes identified by (name, type, port)
 
 def register(name, type, port):
     port = str(port)
