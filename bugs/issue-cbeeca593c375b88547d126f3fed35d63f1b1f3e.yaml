@@ -3,7 +3,7 @@ title: Minimal documentation for all public functions
 desc: ""
 type: :feature
 component: zeroconf
-release: 
+release: "1.0"
 reporter: boisgera <Sebastien.Boisgerault@mines-paristech.fr>
 status: :unstarted
 disposition: 
@@ -15,4 +15,8 @@ log_events:
 - - 2012-04-29 13:27:14.067791 Z
   - boisgera <Sebastien.Boisgerault@mines-paristech.fr>
   - created
+  - ""
+- - 2012-04-29 13:29:27.432999 Z
+  - boisgera <Sebastien.Boisgerault@mines-paristech.fr>
+  - assigned to release 1.0 from unassigned
   - ""
