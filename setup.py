@@ -26,6 +26,10 @@ def get_info(module):
     if license:
         info["license"] = license
 
+    url = getattr(zeroconf, "__url__", None)
+    if url:
+        info["url"] = url
+
     version = getattr(zeroconf, "__version__", None)
     if version:
         info["version"] = version

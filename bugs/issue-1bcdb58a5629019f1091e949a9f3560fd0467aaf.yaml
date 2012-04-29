@@ -5,8 +5,8 @@ type: :bugfix
 component: zeroconf
 release: "1.0"
 reporter: boisgera <Sebastien.Boisgerault@mines-paristech.fr>
-status: :unstarted
-disposition: 
+status: :closed
+disposition: :fixed
 creation_time: 2012-04-29 13:23:09.732357 Z
 references: []
 
@@ -19,4 +19,8 @@ log_events:
 - - 2012-04-29 13:30:22.913748 Z
   - boisgera <Sebastien.Boisgerault@mines-paristech.fr>
   - assigned to release 1.0 from unassigned
+  - ""
+- - 2012-04-29 14:00:29.406861 Z
+  - boisgera <Sebastien.Boisgerault@mines-paristech.fr>
+  - closed with disposition fixed
   - ""
