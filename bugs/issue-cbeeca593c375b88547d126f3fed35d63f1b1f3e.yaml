@@ -1,0 +1,18 @@
+--- !ditz.rubyforge.org,2008-03-06/issue 
+title: Minimal documentation for all public functions
+desc: ""
+type: :feature
+component: zeroconf
+release: 
+reporter: boisgera <Sebastien.Boisgerault@mines-paristech.fr>
+status: :unstarted
+disposition: 
+creation_time: 2012-04-29 13:27:13.345675 Z
+references: []
+
+id: cbeeca593c375b88547d126f3fed35d63f1b1f3e
+log_events: 
+- - 2012-04-29 13:27:14.067791 Z
+  - boisgera <Sebastien.Boisgerault@mines-paristech.fr>
+  - created
+  - ""

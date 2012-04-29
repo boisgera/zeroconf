@@ -1,0 +1,18 @@
+--- !ditz.rubyforge.org,2008-03-06/issue 
+title: Unicode support for service name
+desc: ""
+type: :feature
+component: zeroconf
+release: 
+reporter: boisgera <Sebastien.Boisgerault@mines-paristech.fr>
+status: :unstarted
+disposition: 
+creation_time: 2012-04-29 13:24:18.590600 Z
+references: []
+
+id: cf83ad674f295e906a9df5ed9344d2de5d8c3fd3
+log_events: 
+- - 2012-04-29 13:24:19.456384 Z
+  - boisgera <Sebastien.Boisgerault@mines-paristech.fr>
+  - created
+  - ""

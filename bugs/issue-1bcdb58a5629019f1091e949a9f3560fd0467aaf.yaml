@@ -1,0 +1,18 @@
+--- !ditz.rubyforge.org,2008-03-06/issue 
+title: Missing metadata in setup.py
+desc: ""
+type: :bugfix
+component: zeroconf
+release: 
+reporter: boisgera <Sebastien.Boisgerault@mines-paristech.fr>
+status: :unstarted
+disposition: 
+creation_time: 2012-04-29 13:23:09.732357 Z
+references: []
+
+id: 1bcdb58a5629019f1091e949a9f3560fd0467aaf
+log_events: 
+- - 2012-04-29 13:23:12.079380 Z
+  - boisgera <Sebastien.Boisgerault@mines-paristech.fr>
+  - created
+  - ""

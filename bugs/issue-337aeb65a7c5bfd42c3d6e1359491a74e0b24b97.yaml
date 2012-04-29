@@ -1,0 +1,18 @@
+--- !ditz.rubyforge.org,2008-03-06/issue 
+title: Behavior when the service can't be resolved
+desc: ""
+type: :feature
+component: zeroconf
+release: 
+reporter: boisgera <Sebastien.Boisgerault@mines-paristech.fr>
+status: :unstarted
+disposition: 
+creation_time: 2012-04-29 13:24:57.198908 Z
+references: []
+
+id: 337aeb65a7c5bfd42c3d6e1359491a74e0b24b97
+log_events: 
+- - 2012-04-29 13:24:58.589619 Z
+  - boisgera <Sebastien.Boisgerault@mines-paristech.fr>
+  - created
+  - ""
