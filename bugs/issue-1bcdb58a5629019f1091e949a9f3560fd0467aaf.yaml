@@ -3,7 +3,7 @@ title: Missing metadata in setup.py
 desc: ""
 type: :bugfix
 component: zeroconf
-release: 
+release: "1.0"
 reporter: boisgera <Sebastien.Boisgerault@mines-paristech.fr>
 status: :unstarted
 disposition: 
@@ -15,4 +15,8 @@ log_events:
 - - 2012-04-29 13:23:12.079380 Z
   - boisgera <Sebastien.Boisgerault@mines-paristech.fr>
   - created
+  - ""
+- - 2012-04-29 13:30:22.913748 Z
+  - boisgera <Sebastien.Boisgerault@mines-paristech.fr>
+  - assigned to release 1.0 from unassigned
   - ""
