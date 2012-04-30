@@ -52,4 +52,21 @@ Search results are dictionaries:
 The keys are `(name, type, domain)` tuples and the values are dictionaries with `txt`, 
 `hostname`, `port` and `address` keys.
 
+### Zeroconf Services Registration
+
+Register a new zeroconf service in the local domain with:
+
+    >>> zeroconf.register(name="ghost [08:00:27:bf:49:e1]", type="_workstation._tcp", port="9")
+
+and when you're done, unregister it with:
+
+    >>> zeroconf.unregister(name="ghost [08:00:27:bf:49:e1]", type="_workstation._tcp", port="9")
+
+All arguments to `unregister` are optional, so we could have done:
+
+    >>> zeroconf.unregister(name="ghost [08:00:27:bf:49:e1]")
+
+or even, to unregister all services published during the Python session:
+
+    >>> zeroconf.unregister()
 
