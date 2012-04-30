@@ -10,3 +10,5 @@ build/*
 html/*
 .ditz-config
 
+README.html
+
