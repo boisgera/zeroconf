@@ -1,0 +1,18 @@
+--- !ditz.rubyforge.org,2008-03-06/issue 
+title: "\"local\" or \"local.\" ?"
+desc: ""
+type: :feature
+component: zeroconf
+release: 
+reporter: boisgera <Sebastien.Boisgerault@mines-paristech.fr>
+status: :unstarted
+disposition: 
+creation_time: 2012-04-30 10:45:01.787065 Z
+references: []
+
+id: ee3d2d54095854230c1573b120318ca1212ad461
+log_events: 
+- - 2012-04-30 10:45:01.787350 Z
+  - boisgera <Sebastien.Boisgerault@mines-paristech.fr>
+  - created
+  - ""
