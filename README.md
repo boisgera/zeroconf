@@ -6,6 +6,8 @@ A simple Python 2.7 interface to Zeroconf service discovery and registration.
 Installation
 --------------------------------------------------------------------------------
 
+### Requirements
+
 The `zeroconf` module assumes that the [avahi](http://avahi.org/) command-line 
 tools `avahi-browse` and `avahi-publish` are available.
 On Ubuntu for example, they may me installed with:
@@ -18,6 +20,12 @@ it with
     $ sudo pip install pbs
 
 [pbs]: https://github.com/amoffat
+
+### Install
+
+Download the source distribution and type:
+
+    $ sudo python setup.py install
 
 Usage
 --------------------------------------------------------------------------------
