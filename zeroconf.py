@@ -15,6 +15,7 @@ import pipes
 import re
 import subprocess
 import sys
+import time
 
 startupinfo = subprocess.STARTUPINFO()
 startupinfo.dwFlags |= subprocess.STARTF_USESHOWWINDOW
@@ -31,6 +32,7 @@ elif sys.platform.startswith("win"):
         process.kill()
     except WindowsError:
         raise ImportError("unable to find dns-sd command-line tools")
+        
 # Service Search
 # ------------------------------------------------------------------------------
 def search(name=None, type=None, domain="local"):
@@ -41,35 +43,84 @@ def search(name=None, type=None, domain="local"):
     and data values ; data are dictionaries with "hostname", "address", 
     "port" and "txt" keys.
     """
-
-    options = {"terminate"   : True  , 
-               "resolve"     : True  , 
-               "parsable"    : True  , 
-               "no-db-lookup": True  , 
-               "domain"      : domain}
-    if type:
-         results = host.avahi_browse(type, **options)
-    else:
-         results = host.avahi_browse(all=True, **options)
-    results = [line.split(";") for line in results.splitlines()]
-
-    info = {}
-    for result in results:
-        if result[0] == "=":
-            symbol, _, ip_version, name_, type_, domain_, \
-            hostname, address, port, txt = result
-            name_ = decode(name_)
-            if ip_version == "IPv4":
-                info[(name_, type_, domain_)] = {"hostname": hostname,
-                                                 "address" : address ,
-                                                 "port"    : port    ,
-                                                 "txt"     : txt     }
     def name_match(service):
         name_, _, _ = service
         return (name is None or name_ == name)
+            
+    if sys.platform.startswith("linux"):
+        
+        options = {"terminate"   : True  , 
+                   "resolve"     : True  , 
+                   "parsable"    : True  , 
+                   "no-db-lookup": True  , 
+                   "domain"      : domain}
+        if type:
+             results = host.avahi_browse(type, **options)
+        else:
+             results = host.avahi_browse(all=True, **options)
+        results = [line.split(";") for line in results.splitlines()]
+    
+        info = {}
+        for result in results:
+            if result[0] == "=":
+                symbol, _, ip_version, name_, type_, domain_, \
+                hostname, address, port, txt = result
+                name_ = decode(name_)
+                if ip_version == "IPv4":
+                    info[(name_, type_, domain_)] = {"hostname": hostname,
+                                                     "address" : address ,
+                                                     "port"    : port    ,
+                                                     "txt"     : txt     }
+    
+        filtered_info = [item for item in info.items() if name_match(item[0])]
+        return dict(filtered_info)
+        
+    elif sys.platform.startswith("win"):  
 
-    filtered_info = [item for item in info.items() if name_match(item[0])]
-    return dict(filtered_info)
+        if not type:
+            type = "."
+            
+        process = subprocess.Popen("dns-sd -Z " + type + " " + domain, \
+                                   stdout=subprocess.PIPE, \
+                                   startupinfo=startupinfo) 
+        time.sleep(0.1)
+        process.kill()
+        results = process.stdout.read()
+        results =  [line.split() for line in results.splitlines()]
+    
+        info = {}
+        name_ = port = hostname = address = ""
+        
+        for result in results:
+            
+            if len(result) == 14 and result[1] == "SRV":
+                name_ = decode(result[0]).split(".")[0]
+                port = result[4]
+                hostname = result[5]
+                address = get_address(hostname)
+                
+            if len(result) == 3 and result[1] == "TXT":
+                txt = str.replace(result[2],'"','')
+                info[(name_, type, domain)] = {"hostname": hostname,
+                                                 "address" : address ,
+                                                 "port"    : port    ,
+                                                 "txt"     : txt      }
+    
+
+        filtered_info = [item for item in info.items() if name_match(item[0])]
+        return dict(filtered_info)
+
+def get_address(hostname):
+    process = subprocess.Popen("dns-sd -Q " + hostname, 
+                         stdout=subprocess.PIPE, startupinfo=startupinfo) 
+    time.sleep(0.1)
+    process.kill()
+    results = process.stdout.read()
+    results =  [line.split() for line in results.splitlines()]
+    
+    if len(results) >= 1:
+        return results[1][len(results[1]) - 1]                
+    return ''
 
 def decode(text):
     r"""
@@ -129,4 +180,4 @@ def unregister(name=None, type=None, port=None):
 if __name__ == "__main__":
     import doctest
     doctest.testmod()
-
+    
