@@ -16,13 +16,21 @@ import re
 import subprocess
 import sys
 
-# Third-Party Libraries
-import pbs as host
+startupinfo = subprocess.STARTUPINFO()
+startupinfo.dwFlags |= subprocess.STARTF_USESHOWWINDOW
 
 if sys.platform.startswith("linux"):
+    # Third-Party Libraries
+    import pbs as host
+    
     if not host.which("avahi-browse"):
         raise ImportError("unable to find avahi command-line tools")
-
+elif sys.platform.startswith("win"):        
+    try:
+        process = subprocess.Popen("dns-sd", startupinfo=startupinfo)
+        process.kill()
+    except WindowsError:
+        raise ImportError("unable to find dns-sd command-line tools")
 # Service Search
 # ------------------------------------------------------------------------------
 def search(name=None, type=None, domain="local"):
