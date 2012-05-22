@@ -159,10 +159,18 @@ def register(name, type, port):
     if (name, type, port) in _publishers:
         raise RuntimeError("service already registered")
     else:
-        args = ["avahi-publish", "-s", name, type, port]
-        publisher = subprocess.Popen(args, stderr=subprocess.PIPE, \
-                                           stdout=subprocess.PIPE)
-        _publishers[(name, type, port)] = publisher
+        if sys.platform.startswith("linux"):
+            args = ["avahi-publish", "-s", name, type, port]
+            publisher = subprocess.Popen(args, stderr=subprocess.PIPE, \
+                                               stdout=subprocess.PIPE)
+            _publishers[(name, type, port)] = publisher
+            
+        elif sys.platform.startswith("win"): 
+            args = "dns-sd -R " + name + " " + type + " local " + port
+            publisher = subprocess.Popen(args, stderr=subprocess.PIPE, \
+                                               stdout=subprocess.PIPE, \
+                                               startupinfo=startupinfo)                   
+            _publishers[(name, type, port)] = publisher
 
 def unregister(name=None, type=None, port=None):
     if port:
