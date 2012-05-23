@@ -11,6 +11,7 @@ __url__ = "https://github.com/boisgera/zeroconf"
 __version__ = "0.0.0"
 
 # Python 2.7 Standard Library
+import atexit
 import pipes
 import re
 import subprocess
@@ -184,6 +185,8 @@ def unregister(name=None, type=None, port=None):
     for pid in pids:
         _publishers[pid].kill()
         del _publishers[pid]
+
+atexit.register(unregister)
 
 if __name__ == "__main__":
     import doctest
