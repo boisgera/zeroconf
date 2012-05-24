@@ -71,8 +71,7 @@ def search(name=None, type=None, domain="local"):
                                                      "port"    : port    ,
                                                      "txt"     : txt     }
     
-        filtered_info = [item for item in info.items() if name_match(item[0])]
-        return dict(filtered_info)
+
         
     elif sys.platform.startswith("win"):  
 
@@ -105,9 +104,8 @@ def search(name=None, type=None, domain="local"):
                                                "port"    : port    ,
                                                "txt"     : txt     }
     
-
-        filtered_info = [item for item in info.items() if name_match(item[0])]
-        return dict(filtered_info)
+    filtered_info = [item for item in info.items() if name_match(item[0])]
+    return dict(filtered_info)
 
 def get_address(hostname):
     process = subprocess.Popen("dns-sd -Q " + hostname, 
