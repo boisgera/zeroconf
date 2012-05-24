@@ -36,7 +36,7 @@ elif sys.platform.startswith("win"):
 # ------------------------------------------------------------------------------
 def search(name=None, type=None, domain="local"):
     """
-    Search available zeroconf services
+    Search available Zeroconf services
 
     The result is a dictionary with service (name, type, domain) keys 
     and data values ; data are dictionaries with "hostname", "address", 
@@ -152,6 +152,9 @@ def decode(text):
 _publishers = {} # service publisher processes identified by (name, type, port)
 
 def register(name, type, port):
+    """
+    Register a Zeroconf service
+    """
     port = str(port)
     if (name, type, port) in _publishers:
         raise RuntimeError("service already registered")
@@ -170,6 +173,15 @@ def register(name, type, port):
             _publishers[(name, type, port)] = publisher
 
 def unregister(name=None, type=None, port=None):
+    """
+    Unregister a Zeroconf service
+
+    When an argument is omitted, the function will attempt to unregister 
+    all services that match the remaining arguments, or all services if
+    no arguments are provided.
+    The unregistration is limited to services whose registration comes
+    from the same instance of the zeroconf module.
+    """
     if port:
         port = str(port)
     pids = []

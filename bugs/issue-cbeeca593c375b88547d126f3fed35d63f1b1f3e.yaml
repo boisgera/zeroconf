@@ -5,8 +5,8 @@ type: :feature
 component: zeroconf
 release: "1.0"
 reporter: boisgera <Sebastien.Boisgerault@mines-paristech.fr>
-status: :unstarted
-disposition: 
+status: :closed
+disposition: :fixed
 creation_time: 2012-04-29 13:27:13.345675 Z
 references: []
 
@@ -19,4 +19,8 @@ log_events:
 - - 2012-04-29 13:29:27.432999 Z
   - boisgera <Sebastien.Boisgerault@mines-paristech.fr>
   - assigned to release 1.0 from unassigned
+  - ""
+- - 2012-05-24 14:43:10.622560 Z
+  - "S\xC3\xA9bastien Boisg\xC3\xA9rault <Sebastien.Boisgerault@mines-paristech.fr>"
+  - closed with disposition fixed
   - ""
