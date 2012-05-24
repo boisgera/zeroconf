@@ -1,0 +1,22 @@
+--- !ditz.rubyforge.org,2008-03-06/issue 
+title: basic unit tests
+desc: ""
+type: :task
+component: zeroconf
+release: "1.0"
+reporter: "S\xC3\xA9bastien Boisg\xC3\xA9rault <Sebastien.Boisgerault@mines-paristech.fr>"
+status: :closed
+disposition: :fixed
+creation_time: 2012-05-24 14:45:27.079311 Z
+references: []
+
+id: 7d0cd8473f1e2590312c58f1e45390575c403c4c
+log_events: 
+- - 2012-05-24 14:45:28.220215 Z
+  - "S\xC3\xA9bastien Boisg\xC3\xA9rault <Sebastien.Boisgerault@mines-paristech.fr>"
+  - created
+  - ""
+- - 2012-05-24 15:08:43.958410 Z
+  - "S\xC3\xA9bastien Boisg\xC3\xA9rault <Sebastien.Boisgerault@mines-paristech.fr>"
+  - closed with disposition fixed
+  - ""

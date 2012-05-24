@@ -196,6 +196,45 @@ def unregister(name=None, type=None, port=None):
 
 atexit.register(unregister)
 
+#-------------------------------------------------------------------------------
+# Doctests
+#-------------------------------------------------------------------------------
+def test_basic():
+    """
+    >>> import time
+
+    Register a new (fake) HTTP server
+    >>> register(name="my web server", type="_http._tcp", port="49152")
+    >>> time.sleep(1.0)
+    
+    Basic search (fully specified):
+    >>> services = search("my web server", "_http._tcp", "local")
+    >>> info = services.get(("my web server", "_http._tcp", "local"))
+    >>> info is not None
+    True
+    >>> print info["port"]
+    49152
+
+    The `domain` argument is optional and defaults to "local":
+    >>> search("my web server", "_http._tcp") == services
+    True
+
+    When the `type` argument is not given, all service types are considered:
+    >>> search("my web server") == services
+    True
+
+    The service `name` is optional too:
+    >>> http_services = search(type="_http._tcp")
+    >>> services.items()[0] in http_services.items()
+    True
+
+    Unregister the HTTP server:
+    >>> unregister(name="my web server", type="_http._tcp", port="49152")
+    >>> time.sleep(1.0)
+    >>> search("my web server", "_http._tcp")
+    {}
+    """
+
 if __name__ == "__main__":
     import doctest
     doctest.testmod()
