@@ -82,7 +82,7 @@ def search(name=None, type=None, domain="local"):
         process = subprocess.Popen("dns-sd -Z " + type + " " + domain, \
                                    stdout=subprocess.PIPE, \
                                    startupinfo=startupinfo) 
-        time.sleep(0.1)
+        time.sleep(1.0)
         process.kill()
         results = process.stdout.read()
         results =  [line.split() for line in results.splitlines()]
