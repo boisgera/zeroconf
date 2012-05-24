@@ -3,10 +3,10 @@ title: Automatically unregister services
 desc: ""
 type: :bugfix
 component: zeroconf
-release: 
+release: "1.0"
 reporter: boisgera <Sebastien.Boisgerault@mines-paristech.fr>
-status: :unstarted
-disposition: 
+status: :closed
+disposition: :fixed
 creation_time: 2012-04-29 13:25:45.783792 Z
 references: []
 
@@ -20,3 +20,11 @@ log_events:
   - "S\xC3\xA9bastien Boisg\xC3\xA9rault <Sebastien.Boisgerault@mines-paristech.fr>"
   - commented
   - Done for normal process exit.
+- - 2012-05-24 14:20:55.423120 Z
+  - "S\xC3\xA9bastien Boisg\xC3\xA9rault <Sebastien.Boisgerault@mines-paristech.fr>"
+  - assigned to release 1.0 from unassigned
+  - ""
+- - 2012-05-24 14:28:37.871569 Z
+  - "S\xC3\xA9bastien Boisg\xC3\xA9rault <Sebastien.Boisgerault@mines-paristech.fr>"
+  - closed with disposition fixed
+  - ""
