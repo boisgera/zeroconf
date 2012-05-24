@@ -18,16 +18,14 @@ import subprocess
 import sys
 import time
 
-startupinfo = subprocess.STARTUPINFO()
-startupinfo.dwFlags |= subprocess.STARTF_USESHOWWINDOW
-
 if sys.platform.startswith("linux"):
     # Third-Party Libraries
-    import pbs as host
-    
+    import pbs as host    
     if not host.which("avahi-browse"):
         raise ImportError("unable to find avahi command-line tools")
-elif sys.platform.startswith("win"):        
+elif sys.platform.startswith("win"):
+    startupinfo = subprocess.STARTUPINFO()
+    startupinfo.dwFlags |= subprocess.STARTF_USESHOWWINDOW   
     try:
         process = subprocess.Popen("dns-sd", startupinfo=startupinfo)
         process.kill()
@@ -103,9 +101,9 @@ def search(name=None, type=None, domain="local"):
             if len(result) == 3 and result[1] == "TXT":
                 txt = str.replace(result[2],'"','')
                 info[(name_, type, domain)] = {"hostname": hostname,
-                                                 "address" : address ,
-                                                 "port"    : port    ,
-                                                 "txt"     : txt      }
+                                               "address" : address ,
+                                               "port"    : port    ,
+                                               "txt"     : txt     }
     
 
         filtered_info = [item for item in info.items() if name_match(item[0])]
