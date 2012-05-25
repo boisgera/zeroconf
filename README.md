@@ -78,3 +78,9 @@ or even, to unregister all services published during the Python session:
 
     >>> zeroconf.unregister()
 
+Contributors
+--------------------------------------------------------------------------------
+
+  - Sébastien Boisgérault <Sebastien.Boisgerault@mines-paristech.fr>,
+  - Olivier Huynh <olivierv.huynh@free.fr>.
+
