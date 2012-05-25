@@ -79,7 +79,7 @@ def search(name=None, type=None, domain="local"):
     elif sys.platform.startswith("win"):  
 
         if not type:
-            type = "."
+            type = "_http._tcp"
             
         process = subprocess.Popen("dns-sd -Z " + type + " " + domain, \
                                    stdout=subprocess.PIPE, \
