@@ -167,7 +167,7 @@ def register(name, type, port):
             _publishers[(name, type, port)] = publisher
             
         elif sys.platform.startswith("win"): 
-            args = "dns-sd -R " + name + " " + type + " local " + port
+            args = 'dns-sd -R "' + name + '" ' + type + " local " + port
             publisher = subprocess.Popen(args, stderr=subprocess.PIPE, \
                                                stdout=subprocess.PIPE, \
                                                startupinfo=startupinfo)                   
