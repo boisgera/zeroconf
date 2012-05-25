@@ -76,7 +76,7 @@ def search(name=None, type=None, domain="local"):
     elif sys.platform.startswith("win"):  
 
         if not type:
-            type = "."
+            type = "_http._tcp"
             
         process = subprocess.Popen("dns-sd -Z " + type + " " + domain, \
                                    stdout=subprocess.PIPE, \
@@ -166,7 +166,7 @@ def register(name, type, port):
             _publishers[(name, type, port)] = publisher
             
         elif sys.platform.startswith("win"): 
-            args = "dns-sd -R " + name + " " + type + " local " + port
+            args = 'dns-sd -R "' + name + '" ' + type + " local " + port
             publisher = subprocess.Popen(args, stderr=subprocess.PIPE, \
                                                stdout=subprocess.PIPE, \
                                                startupinfo=startupinfo)                   
