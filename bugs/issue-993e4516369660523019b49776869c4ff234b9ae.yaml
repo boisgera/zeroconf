@@ -1,0 +1,22 @@
+--- !ditz.rubyforge.org,2008-03-06/issue 
+title: STARTUPINFO does not exist on Linux
+desc: ""
+type: :bugfix
+component: zeroconf
+release: "1.0"
+reporter: "S\xC3\xA9bastien Boisg\xC3\xA9rault <Sebastien.Boisgerault@mines-paristech.fr>"
+status: :closed
+disposition: :fixed
+creation_time: 2012-05-24 14:30:45.618572 Z
+references: []
+
+id: 993e4516369660523019b49776869c4ff234b9ae
+log_events: 
+- - 2012-05-24 14:30:46.794467 Z
+  - "S\xC3\xA9bastien Boisg\xC3\xA9rault <Sebastien.Boisgerault@mines-paristech.fr>"
+  - created
+  - ""
+- - 2012-05-24 14:42:53.717144 Z
+  - "S\xC3\xA9bastien Boisg\xC3\xA9rault <Sebastien.Boisgerault@mines-paristech.fr>"
+  - closed with disposition fixed
+  - ""

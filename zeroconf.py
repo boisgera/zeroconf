@@ -8,7 +8,7 @@ Simple/Pythonic Zeroconf Service Search/Registration
 __author__ = u"Sébastien Boisgérault <Sebastien.Boisgerault@mines-paristech.fr>"
 __license__ = "MIT License"
 __url__ = "https://github.com/boisgera/zeroconf" 
-__version__ = "0.0.0"
+__version__ = "1.0.0"
 
 # Python 2.7 Standard Library
 import atexit
@@ -18,16 +18,14 @@ import subprocess
 import sys
 import time
 
-startupinfo = subprocess.STARTUPINFO()
-startupinfo.dwFlags |= subprocess.STARTF_USESHOWWINDOW
-
 if sys.platform.startswith("linux"):
     # Third-Party Libraries
-    import pbs as host
-    
+    import pbs as host    
     if not host.which("avahi-browse"):
         raise ImportError("unable to find avahi command-line tools")
-elif sys.platform.startswith("win"):        
+elif sys.platform.startswith("win"):
+    startupinfo = subprocess.STARTUPINFO()
+    startupinfo.dwFlags |= subprocess.STARTF_USESHOWWINDOW   
     try:
         process = subprocess.Popen("dns-sd", startupinfo=startupinfo)
         process.kill()
@@ -38,7 +36,7 @@ elif sys.platform.startswith("win"):
 # ------------------------------------------------------------------------------
 def search(name=None, type=None, domain="local"):
     """
-    Search available zeroconf services
+    Search available Zeroconf services
 
     The result is a dictionary with service (name, type, domain) keys 
     and data values ; data are dictionaries with "hostname", "address", 
@@ -73,8 +71,7 @@ def search(name=None, type=None, domain="local"):
                                                      "port"    : port    ,
                                                      "txt"     : txt     }
     
-        filtered_info = [item for item in info.items() if name_match(item[0])]
-        return dict(filtered_info)
+
         
     elif sys.platform.startswith("win"):  
 
@@ -84,7 +81,7 @@ def search(name=None, type=None, domain="local"):
         process = subprocess.Popen("dns-sd -Z " + type + " " + domain, \
                                    stdout=subprocess.PIPE, \
                                    startupinfo=startupinfo) 
-        time.sleep(0.1)
+        time.sleep(1.0)
         process.kill()
         results = process.stdout.read()
         results =  [line.split() for line in results.splitlines()]
@@ -103,13 +100,12 @@ def search(name=None, type=None, domain="local"):
             if len(result) == 3 and result[1] == "TXT":
                 txt = str.replace(result[2],'"','')
                 info[(name_, type, domain)] = {"hostname": hostname,
-                                                 "address" : address ,
-                                                 "port"    : port    ,
-                                                 "txt"     : txt      }
+                                               "address" : address ,
+                                               "port"    : port    ,
+                                               "txt"     : txt     }
     
-
-        filtered_info = [item for item in info.items() if name_match(item[0])]
-        return dict(filtered_info)
+    filtered_info = [item for item in info.items() if name_match(item[0])]
+    return dict(filtered_info)
 
 def get_address(hostname):
     process = subprocess.Popen("dns-sd -Q " + hostname, 
@@ -156,6 +152,9 @@ def decode(text):
 _publishers = {} # service publisher processes identified by (name, type, port)
 
 def register(name, type, port):
+    """
+    Register a Zeroconf service
+    """
     port = str(port)
     if (name, type, port) in _publishers:
         raise RuntimeError("service already registered")
@@ -174,6 +173,15 @@ def register(name, type, port):
             _publishers[(name, type, port)] = publisher
 
 def unregister(name=None, type=None, port=None):
+    """
+    Unregister a Zeroconf service
+
+    When an argument is omitted, the function will attempt to unregister 
+    all services that match the remaining arguments, or all services if
+    no arguments are provided.
+    The unregistration is limited to services whose registration comes
+    from the same instance of the zeroconf module.
+    """
     if port:
         port = str(port)
     pids = []
@@ -187,6 +195,45 @@ def unregister(name=None, type=None, port=None):
         del _publishers[pid]
 
 atexit.register(unregister)
+
+#-------------------------------------------------------------------------------
+# Doctests
+#-------------------------------------------------------------------------------
+def test_basic():
+    """
+    >>> import time
+
+    Register a new (fake) HTTP server
+    >>> register(name="my web server", type="_http._tcp", port="49152")
+    >>> time.sleep(1.0)
+    
+    Basic search (fully specified):
+    >>> services = search("my web server", "_http._tcp", "local")
+    >>> info = services.get(("my web server", "_http._tcp", "local"))
+    >>> info is not None
+    True
+    >>> print info["port"]
+    49152
+
+    The `domain` argument is optional and defaults to "local":
+    >>> search("my web server", "_http._tcp") == services
+    True
+
+    When the `type` argument is not given, all service types are considered:
+    >>> search("my web server") == services
+    True
+
+    The service `name` is optional too:
+    >>> http_services = search(type="_http._tcp")
+    >>> services.items()[0] in http_services.items()
+    True
+
+    Unregister the HTTP server:
+    >>> unregister(name="my web server", type="_http._tcp", port="49152")
+    >>> time.sleep(1.0)
+    >>> search("my web server", "_http._tcp")
+    {}
+    """
 
 if __name__ == "__main__":
     import doctest

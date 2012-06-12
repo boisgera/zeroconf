@@ -16,25 +16,25 @@ def get_info(module):
         name = module.__file__.split(".")[0]
     info["name"] = name
 
-    author_info = getattr(zeroconf, "__author__", None)
+    author_info = getattr(module, "__author__", None)
     if author_info:
         # "author <author_email>" syntax expected
         info["author"] = author_info.split("<")[0].strip()
         info["author_email"] = author_info.split("<")[1].strip()[:-1]
 
-    license = getattr(zeroconf, "__license__", None)
+    license = getattr(module, "__license__", None)
     if license:
         info["license"] = license
 
-    url = getattr(zeroconf, "__url__", None)
+    url = getattr(module, "__url__", None)
     if url:
         info["url"] = url
 
-    version = getattr(zeroconf, "__version__", None)
+    version = getattr(module, "__version__", None)
     if version:
         info["version"] = version
 
-    doc = getattr(zeroconf, "__doc__", None)
+    doc = getattr(module, "__doc__", None)
     if doc:
         # the description is expected to be the first non-blank doc line
         lines = doc.splitlines()
@@ -43,7 +43,7 @@ def get_info(module):
                 info["description"] = line
                 break
 
-    module = getattr(zeroconf, "__file__")
+    module = getattr(module, "__file__")
     if module:
         info["py_modules"] = [os.path.basename(module).split(".")[0]]
 
@@ -55,5 +55,5 @@ info = get_info(zeroconf)
 
 info["requires"] = "pbs"
 
-distutils.core.setup(**get_info(zeroconf))
+distutils.core.setup(**info)
 
