@@ -1,0 +1,20 @@
+--- !ditz.rubyforge.org,2008-03-06/issue 
+title: "Windows dns-sd : not accept a search for all types"
+desc: |-
+  Automatically searching for _html._tcp if the type is not specified. Same result with "."
+  It does not exist a parameter to specify a "global" type...
+type: :bugfix
+component: zeroconf
+release: 
+reporter: Olivier <ohuynh@paris.ensmp.fr>
+status: :unstarted
+disposition: 
+creation_time: 2012-06-12 15:14:12.661779 Z
+references: []
+
+id: 3dfcbb01a2a23b5f510049e545d99eb1d2995477
+log_events: 
+- - 2012-06-12 15:14:18.547527 Z
+  - Olivier <ohuynh@paris.ensmp.fr>
+  - created
+  - ""
