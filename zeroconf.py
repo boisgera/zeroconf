@@ -96,10 +96,11 @@ def search(name=None, type=None, domain="local"):
                 port = result[4]
                 hostname = result[5]
                 address = get_address(hostname)
+                type_ = decode(result[0])[(decode(result[0]).find(".") + 1):]
                 
             if len(result) == 3 and result[1] == "TXT":
                 txt = str.replace(result[2],'"','')
-                info[(name_, type, domain)] = {"hostname": hostname,
+                info[(name_, type_, domain)] = {"hostname": hostname,
                                                "address" : address ,
                                                "port"    : port    ,
                                                "txt"     : txt     }
