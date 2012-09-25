@@ -1,12 +1,12 @@
 --- !ditz.rubyforge.org,2008-03-06/issue 
-title: Bug decode name
-desc: "issue on Unicode 0xe2, with the name : HP\\032LaserJet\\0322300\\032series\\032\\064\\032Bogdan\\226\\128\\153s\\032iMac"
+title: decode chokes on unicode strings that represent codes above 127
+desc: "for example: `decode(ur'\\128')` raises an exception."
 type: :bugfix
 component: zeroconf
 release: "1.0"
 reporter: Olivier <ohuynh@paris.ensmp.fr>
-status: :unstarted
-disposition: 
+status: :closed
+disposition: :fixed
 creation_time: 2012-09-25 10:20:02.320129 Z
 references: []
 
@@ -15,4 +15,8 @@ log_events:
 - - 2012-09-25 10:20:03.780314 Z
   - Olivier <ohuynh@paris.ensmp.fr>
   - created
+  - ""
+- - 2012-09-25 13:25:26.566804 Z
+  - "S\xC3\xA9bastien Boisg\xC3\xA9rault <Sebastien.Boisgerault@mines-paristech.fr>"
+  - closed with disposition fixed
   - ""
