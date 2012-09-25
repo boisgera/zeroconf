@@ -1,0 +1,18 @@
+--- !ditz.rubyforge.org,2008-03-06/issue 
+title: Bug decode name
+desc: "issue on Unicode 0xe2, with the name : HP\\032LaserJet\\0322300\\032series\\032\\064\\032Bogdan\\226\\128\\153s\\032iMac"
+type: :bugfix
+component: zeroconf
+release: "1.0"
+reporter: Olivier <ohuynh@paris.ensmp.fr>
+status: :unstarted
+disposition: 
+creation_time: 2012-09-25 10:20:02.320129 Z
+references: []
+
+id: cb38db2784e88d3eae3c0cd2e8341ee5bc11e6e3
+log_events: 
+- - 2012-09-25 10:20:03.780314 Z
+  - Olivier <ohuynh@paris.ensmp.fr>
+  - created
+  - ""
