@@ -122,11 +122,11 @@ def get_address(hostname):
 
 def decode(text):
     r"""
-    Decode string with special characters escape sequences.
+Decode string with special characters escape sequences.
 
-    We assume that the escaping scheme follows the rules used by `avahi-browse` 
-    when the `--parsable` option is enabled
-    (see `avahi_escape_label` function in `avahi-common/domain.c`).
+We assume that the escaping scheme follows the rules used by `avahi-browse` 
+when the `--parsable` option is enabled
+(see `avahi_escape_label` function in `avahi-common/domain.c`).
 
     >>> decode("abc")
     'abc'
@@ -138,7 +138,20 @@ def decode(text):
     'a c'
     >>> decode(r"a\127c")
     'a\x7fc'
-    """
+
+Characters may go beyond the 0-127 (ascii) range: 
+for example, the 'RIGHT SINGLE QUOTATION MARK', 
+encoded in utf-8 by the three bytes 226, 128 and 153 (decimal):
+
+    >>> decode(r"\226\128\153")
+    '\xe2\x80\x99'
+
+Input strings in unicode are ok as long as they belong to the ascii range:
+
+    >>> decode(ur"\226\128\153")
+    '\xe2\x80\x99'
+"""
+    text = text.encode("ascii")
     def replace(match):
         numeric, other = match.groups()
         if numeric:
