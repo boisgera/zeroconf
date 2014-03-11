@@ -20,7 +20,7 @@ import time
 
 if sys.platform.startswith("linux"):
     # Third-Party Libraries
-    import sh as host    
+    import sh    
     if not host.which("avahi-browse"):
         raise ImportError("unable to find avahi command-line tools")
 elif sys.platform.startswith("win"):
@@ -54,9 +54,9 @@ def search(name=None, type=None, domain="local"):
                    "no-db-lookup": True  , 
                    "domain"      : domain}
         if type:
-             results = host.avahi_browse(type, **options)
+             results = sh.avahi_browse(type, **options)
         else:
-             results = host.avahi_browse(all=True, **options)
+             results = sh.avahi_browse(all=True, **options)
         results = [line.split(";") for line in results.splitlines()]
     
         info = {}

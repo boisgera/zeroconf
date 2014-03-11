@@ -14,12 +14,12 @@ On Ubuntu for example, they may me installed with:
 
     $ sudo apt-get install avahi-tools
 
-The module also depend on [Andrew Moffat's subprocess wrapper][pbs]. Install
+The module also depend on [Andrew Moffat's subprocess wrapper][sh]. Install
 it with
 
-    $ sudo pip install pbs
+    $ sudo pip install sh
 
-[pbs]: https://github.com/amoffat
+[sh]: http://amoffat.github.io/sh
 
 ### Install
 
