@@ -21,7 +21,7 @@ import time
 if sys.platform.startswith("linux"):
     # Third-Party Libraries
     import sh    
-    if not host.which("avahi-browse"):
+    if not sh.which("avahi-browse"):
         raise ImportError("unable to find avahi command-line tools")
 elif sys.platform.startswith("win"):
     startupinfo = subprocess.STARTUPINFO()
